@@ -1,0 +1,118 @@
+{
+    "name": "InputActions",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "cdf311da-d2d7-4d75-a479-c77057995b80",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "PassThrough",
+                    "id": "d982aeba-a981-420c-b95d-bd0955eb6312",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Use",
+                    "type": "PassThrough",
+                    "id": "7b04b8b0-0a2e-40a9-8d71-f626ccfc3e7a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "524db33b-62ce-42b8-829e-087ad576b841",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "8031a422-3ffe-4583-be84-ecbf9814b455",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "c9970264-1386-4c51-bc37-002b6ce7da0d",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "79f55ba8-7c44-42a8-8eef-2727dd4525af",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "55e382b3-5974-4603-b1d8-22532cc63ac6",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "620d04c0-81db-4930-8778-ba276e4d34e5",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "7b1ae3cb-2b93-4388-ba06-d2316f0da4f8",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "73770e8e-2ee6-460d-ac61-90e4e2c2032c",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

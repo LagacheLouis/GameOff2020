@@ -9,6 +9,7 @@ public class PlayerController : ControllerTarget
 
     private Rigidbody _rbody;
     private Vector2 _iMove;
+    public SafetyRope joint;
 
     protected override void Initialize()
     {
@@ -26,7 +27,7 @@ public class PlayerController : ControllerTarget
     // Start is called before the first frame update
     void Start()
     {
-        
+        joint.connectedBody = GameObject.FindGameObjectWithTag("SHIP")?.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame

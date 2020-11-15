@@ -8,10 +8,13 @@ public class Thruster : MonoBehaviour
     public float force;
     public float flickerNoiseRatio;
     public float flickerNoiseScale;
+    public float pivotForceRatio;
 
     public ParticleSystem particleSystem;
 
     private float random;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,16 +25,9 @@ public class Thruster : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float noise = Mathf.PerlinNoise(random, Time.time/ flickerNoiseScale);
-        if(noise < flickerNoiseRatio)
-        {
-            ship.AddForceAtPosition(transform.up * force * noise, transform.position);
-            particleSystem.enableEmission = true;
-        }
-        else
-        {
-            particleSystem.enableEmission = false;
-        }
+        ship.AddForce(transform.up * force * (1-pivotForceRatio));
+        ship.AddForceAtPosition(transform.up * force * pivotForceRatio, transform.position);
+        particleSystem.enableEmission = true;
 
     }
 }

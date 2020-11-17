@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6430670601697281775}
   - component: {fileID: 8822976685700654226}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,7 +111,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 48
   m_CollisionDetection: 0
 --- !u!114 &2601997450440436607
 MonoBehaviour:
@@ -125,8 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593f7c241b89d1f4c9bf0aa340b839da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 10
-  joint: {fileID: 6430670601697281775}
+  speed: 10
+  drag: 0.03
+  rope: {fileID: 6430670601697281775}
+  pushForce: 10
 --- !u!114 &6430670601697281775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectedBody: {fileID: 0}
   minDistance: 1
-  maxDistance: 25
+  maxDistance: 50
   spring: 100
   line: {fileID: 8822976685700654226}
 --- !u!120 &8822976685700654226

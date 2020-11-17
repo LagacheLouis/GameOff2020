@@ -21,13 +21,9 @@ public class SafetyRope : MonoBehaviour
         line.useWorldSpace = true;
     }
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
+        if (!connectedBody) return;
         float distance = Vector3.Distance(transform.position, connectedBody.transform.position);
         List<Vector3> points = new List<Vector3>();
         float nbPoints = 30f;
@@ -46,7 +42,7 @@ public class SafetyRope : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (connectedBody == null) return;
+        if (!connectedBody) return;
         var connection = _rbody.position - connectedBody.position;
         float delta = 0;
         if(connection.magnitude < minDistance)
@@ -57,7 +53,6 @@ public class SafetyRope : MonoBehaviour
         {
             delta = maxDistance - connection.magnitude;
         }
-        Debug.Log(_rbody.velocity + " " + connectedBody.velocity);
         _rbody.position += delta * connection.normalized;
         _rbody.velocity += delta * connection.normalized * spring;
 

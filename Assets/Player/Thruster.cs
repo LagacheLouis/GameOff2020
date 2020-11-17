@@ -2,32 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Thruster : MonoBehaviour
+public class Thruster : MonoBehaviour, IInteractable
 {
-    public Rigidbody ship;
+    public bool powered;
+    public ShipPart shipPart;
     public float force;
-    public float flickerNoiseRatio;
-    public float flickerNoiseScale;
+    [Range(0,1)]
     public float pivotForceRatio;
 
     public ParticleSystem particleSystem;
 
-    private float random;
-
-
-
     // Start is called before the first frame update
     void Start()
     {
-        random = Random.Range(0, 10000);
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        ship.AddForce(transform.up * force * (1-pivotForceRatio));
-        ship.AddForceAtPosition(transform.up * force * pivotForceRatio, transform.position);
-        particleSystem.enableEmission = true;
+        if (powered)
+        {
+            shipPart.group.rbody.AddForce(transform.up * force * (1 - pivotForceRatio));
+            shipPart.group.rbody.AddForceAtPosition(transform.up * force * pivotForceRatio, transform.position);
+        }
 
+        particleSystem.enableEmission = powered;
+
+    }
+
+    public void Use()
+    {
+      
+    }
+
+    public void UseOnce()
+    {
+        powered = !powered;
     }
 }

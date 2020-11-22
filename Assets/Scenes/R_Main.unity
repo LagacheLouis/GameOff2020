@@ -20277,7 +20277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 921126711}
-  distance: 50
+  distance: 20
   smoothTime: 0.01
 --- !u!114 &1773018524
 MonoBehaviour:

@@ -39,8 +39,13 @@ public class PlayerController : ControllerTarget
 
         _playerIndex = UnityEngine.Random.Range(0, 3); // different players can have the same color..
         _playerColor = new Color(playerColors[_playerIndex].r, playerColors[_playerIndex].g, playerColors[_playerIndex].b, 1f);
-        _characterRenderer = GetComponentInChildren<SpriteRenderer>(); // not sure to get the right SpriteRenderer..
+        _characterRenderer = transform.Find("player_idle_color").gameObject.GetComponent<SpriteRenderer>();
         _characterRenderer.color = _playerColor;
+        
+        GameObject helmet = transform.Find("Helmet Quad").gameObject;
+        MeshRenderer helmetRenderer = helmet.GetComponent<MeshRenderer>(); // not sure to get the right MeshRenderer..
+        helmetRenderer.sortingOrder = 3;
+        helmetRenderer.material.SetColor("PlayerColor", _playerColor);
     }
 
     void UpdateShip()

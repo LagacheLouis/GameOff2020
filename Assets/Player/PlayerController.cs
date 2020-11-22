@@ -10,7 +10,7 @@ public class PlayerController : ControllerTarget
     public float drag;
     public SafetyRope rope;
     public float pushForce;
-
+    public Color[] playerColors;
 
 
     private Rigidbody _rbody;
@@ -20,6 +20,9 @@ public class PlayerController : ControllerTarget
     private bool _iUse;
     private bool _iUseOnce;
     private Rigidbody _grabbedRb;
+    private Color _playerColor;
+    private int _playerIndex;
+    private SpriteRenderer _characterRenderer;
 
     protected override void Initialize()
     {
@@ -33,6 +36,11 @@ public class PlayerController : ControllerTarget
         _rbody = GetComponent<Rigidbody>();
         _rbody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationX;
         _rbody.useGravity = false;
+
+        _playerIndex = UnityEngine.Random.Range(0, 3); // different players can have the same color..
+        _playerColor = new Color(playerColors[_playerIndex].r, playerColors[_playerIndex].g, playerColors[_playerIndex].b, 1f);
+        _characterRenderer = GetComponentInChildren<SpriteRenderer>(); // not sure to get the right SpriteRenderer..
+        _characterRenderer.color = _playerColor;
     }
 
     void UpdateShip()

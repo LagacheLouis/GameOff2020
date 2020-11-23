@@ -18,6 +18,7 @@ public class ShipPart : MonoBehaviour
     public float minImpulse = 3;
     [Header("Effect")]
     public ParticleSystem damageEffect;
+    public AudioEvent damageSound;
 
     // Start is called before the first frame update
     void Start()

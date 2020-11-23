@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NaughtyAttributes;
+using Shaker;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +15,6 @@ public class PlayerController : ControllerTarget
     [Range(0, 1)]
     public float pivotForceRatio;
     public Color[] playerColors;
-
 
     private Rigidbody _rbody;
     private Vector3 _iMove;

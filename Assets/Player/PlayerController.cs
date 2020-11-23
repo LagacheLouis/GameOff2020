@@ -12,8 +12,6 @@ public class PlayerController : ControllerTarget
     public float drag;
     public SafetyRope rope;
     public float pushForce;
-    [Range(0, 1)]
-    public float pivotForceRatio;
     public Color[] playerColors;
 
     private Rigidbody _rbody;
@@ -103,10 +101,8 @@ public class PlayerController : ControllerTarget
             if (_grabbedRb)
             {
                 Vector3 direction = _iMove;
-                _grabbedRb.AddForceAtPosition(direction * pushForce * pivotForceRatio, transform.position);
-                _grabbedRb.AddForce(direction * pushForce * (1f-pivotForceRatio));
+                _grabbedRb.AddForce(direction * pushForce);
                 _rbody.velocity = _grabbedRb.GetPointVelocity(transform.position);
-                _rbody.angularVelocity = _grabbedRb.angularVelocity;
             }
         }
         else

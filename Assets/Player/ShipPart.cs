@@ -1,7 +1,9 @@
-﻿using NaughtyAttributes;
+﻿using JetBrains.Annotations;
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [SelectionBase]
 public class ShipPart : MonoBehaviour
@@ -10,6 +12,12 @@ public class ShipPart : MonoBehaviour
     public List<ShipPart> dockedParts = new List<ShipPart>();
     public bool shipCore;
     public bool undockable;
+    [Header("Life")]
+    public float maxLife = 100;
+    public float life = 100;
+    public float minImpulse = 3;
+    [Header("Effect")]
+    public ParticleSystem damageEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -94,13 +102,31 @@ public class ShipPart : MonoBehaviour
         undockable = true;
     }
 
+    public void TakeDamage(float amount)
+    {
+        life -= amount;
+        if (life <= 0)
+        {
+            Explode();
+        }
+    }
 
     public void Collide(Collision collision)
     {
+        var rbody = collision.collider.GetComponentInParent<Rigidbody>();
         var shipPart = collision.collider.GetComponentInParent<ShipPart>();
         if (shipPart && !undockable)
         {
             Dock(shipPart);
+        }else if (rbody && !collision.collider.CompareTag("Player"))
+        {
+            float impulse = Vector3.Magnitude(collision.impulse);
+            if(impulse > minImpulse)
+            {
+                Instantiate(damageEffect, collision.contacts[0].point, Quaternion.identity);
+                Camera.main.DOShakePosition(.3f,1f);
+                TakeDamage(impulse-minImpulse);
+            }
         }
     }
 

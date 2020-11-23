@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 8822976685700654226}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,11 +243,12 @@ MonoBehaviour:
   drag: 0.03
   rope: {fileID: 6430670601697281775}
   pushForce: 10
+  pivotForceRatio: 0
   playerColors:
-  - {r: 0.9150943, g: 0.5838528, b: 0.18560876, a: 0}
-  - {r: 0.37883398, g: 0.8490566, b: 0.20425417, a: 0}
-  - {r: 0.06074228, g: 0.4657241, b: 0.990566, a: 0}
-  - {r: 0.68628186, g: 0.3915094, b: 1, a: 0}
+  - {r: 0.9150943, g: 0.5838528, b: 0.18560876, a: 1}
+  - {r: 0.37883398, g: 0.8490566, b: 0.20425417, a: 1}
+  - {r: 0.06074228, g: 0.4657241, b: 0.990566, a: 1}
+  - {r: 0.68628186, g: 0.3915094, b: 1, a: 1}
 --- !u!114 &6430670601697281775
 MonoBehaviour:
   m_ObjectHideFlags: 0

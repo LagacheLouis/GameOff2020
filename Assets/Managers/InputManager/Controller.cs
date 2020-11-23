@@ -10,12 +10,16 @@ public class Controller : MonoBehaviour
     private PlayerInput _playerInput;
     public Action onLeft = () => { };
 
-
     public  void Initialize()
     {
         _playerInput = GetComponent<PlayerInput>();
         _playerInput.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
         Debug.Log("awake");
+    }
+
+    public int GetId()
+    {
+        return Array.IndexOf(ControllerManager.Inst.Players, this);
     }
 
     // Update is called once per frame

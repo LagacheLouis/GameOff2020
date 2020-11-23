@@ -10,6 +10,8 @@ public class PlayerController : ControllerTarget
     public float drag;
     public SafetyRope rope;
     public float pushForce;
+    [Range(0, 1)]
+    public float pivotForceRatio;
     public Color[] playerColors;
 
 
@@ -29,6 +31,7 @@ public class PlayerController : ControllerTarget
         _controller.On("Grab", (InputAction.CallbackContext ctx) => {  _iGrab = ctx.ReadValue<float>()>0; });
         _controller.On("Use", (InputAction.CallbackContext ctx) => { _iUse = ctx.ReadValue<float>() > 0; _iUseOnce = _iUse; });
         _controller.On("Move", (InputAction.CallbackContext ctx) => { _iMove = ctx.ReadValue<Vector2>(); });
+        UpdateHelmetColor();
     }
 
     void Awake()
@@ -36,15 +39,20 @@ public class PlayerController : ControllerTarget
         _rbody = GetComponent<Rigidbody>();
         _rbody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationX;
         _rbody.useGravity = false;
+    }
 
-        _playerIndex = UnityEngine.Random.Range(0, 3); // different players can have the same color..
-        _playerColor = new Color(playerColors[_playerIndex].r, playerColors[_playerIndex].g, playerColors[_playerIndex].b, 1f);
+    void UpdateHelmetColor()
+    {
+        _playerIndex = _controller.GetId();
+        //   _playerIndex = UnityEngine.Random.Range(0, 3); // different players can have the same color..
+        //_playerColor = new Color(playerColors[_playerIndex].r, playerColors[_playerIndex].g, playerColors[_playerIndex].b, 1f);
+        _playerColor = playerColors[_playerIndex];
         _characterRenderer = transform.Find("player_idle_color").gameObject.GetComponent<SpriteRenderer>();
         _characterRenderer.color = _playerColor;
-        
         GameObject helmet = transform.Find("Helmet Quad").gameObject;
         MeshRenderer helmetRenderer = helmet.GetComponent<MeshRenderer>(); // not sure to get the right MeshRenderer..
         helmetRenderer.sortingOrder = 3;
+        // helmetRenderer.material.SetColor("PlayerColor", _playerColor);
         helmetRenderer.material.SetColor("PlayerColor", _playerColor);
     }
 
@@ -93,12 +101,11 @@ public class PlayerController : ControllerTarget
             _grabbedRb = FindInteractionTarget<Rigidbody>();
             if (_grabbedRb)
             {
-                // _rbody.isKinematic = true; 
-                _rbody.velocity = _grabbedRb.velocity;
                 Vector3 direction = _iMove;
-                //  _grabbedRb.AddForceAtPosition(pushForce * direction, transform.position);
-                _grabbedRb.AddForce(pushForce * direction);
-              //  _rbody.MovePosition(transform.position + _grabbedRb.velocity);
+                _grabbedRb.AddForceAtPosition(direction * pushForce * pivotForceRatio, transform.position);
+                _grabbedRb.AddForce(direction * pushForce * (1f-pivotForceRatio));
+                _rbody.velocity = _grabbedRb.GetPointVelocity(transform.position);
+                _rbody.angularVelocity = _grabbedRb.angularVelocity;
             }
         }
         else
